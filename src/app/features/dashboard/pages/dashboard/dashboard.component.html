@@ -1,0 +1,134 @@
+<div class="page">
+
+  <h1>Dashboard</h1>
+  <p class="subtitle">Resumen del sistema de horarios</p>
+
+  <div class="cards-grid">
+
+    <mat-card class="stat-card" (click)="ir('/teachers')">
+      <mat-card-content>
+        <div class="stat">
+          <mat-icon class="icon blue">person</mat-icon>
+          <div>
+            <div class="number">{{ totalMaestros }}</div>
+            <div class="label">Maestros</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" (click)="ir('/subjects')">
+      <mat-card-content>
+        <div class="stat">
+          <mat-icon class="icon green">menu_book</mat-icon>
+          <div>
+            <div class="number">{{ totalMaterias }}</div>
+            <div class="label">Materias</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" (click)="ir('/groups')">
+      <mat-card-content>
+        <div class="stat">
+          <mat-icon class="icon orange">groups</mat-icon>
+          <div>
+            <div class="number">{{ totalGrupos }}</div>
+            <div class="label">Grupos</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" (click)="ir('/assignments')">
+      <mat-card-content>
+        <div class="stat">
+          <mat-icon class="icon purple">assignment</mat-icon>
+          <div>
+            <div class="number">{{ totalAsignaciones }}</div>
+            <div class="label">Asignaciones</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" (click)="ir('/schedules')">
+      <mat-card-content>
+        <div class="stat">
+          <mat-icon class="icon teal">calendar_month</mat-icon>
+          <div>
+            <div class="number">{{ totalClases }}</div>
+            <div class="label">Clases asignadas</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div class="steps">
+
+    <h2>Pasos para generar un horario</h2>
+
+    <div class="step-list">
+
+      <div class="step" (click)="ir('/subjects')">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>Registra las materias</strong>
+          <p>Matemáticas, Español, Inglés...</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+      <div class="step" (click)="ir('/teachers')">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>Registra los maestros</strong>
+          <p>Nombre, materia, turno y horas semanales</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+      <div class="step" (click)="ir('/teachers')">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>Configura disponibilidad</strong>
+          <p>Marca los horarios disponibles de cada maestro</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+      <div class="step" (click)="ir('/groups')">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <strong>Registra los grupos</strong>
+          <p>1A, 1B, 2A, 2B...</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+      <div class="step" (click)="ir('/assignments')">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <strong>Crea las asignaciones</strong>
+          <p>Asigna maestros a grupos con horas por semana</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+      <div class="step" (click)="ir('/schedules')">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <strong>Genera el horario</strong>
+          <p>Click en ⚡ Generar Horario</p>
+        </div>
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

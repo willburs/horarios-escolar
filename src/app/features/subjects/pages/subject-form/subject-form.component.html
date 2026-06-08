@@ -1,0 +1,23 @@
+<div class="page">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nueva Materia</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre de la materia</mat-label>
+          <input matInput formControlName="nombre">
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary"
+        (click)="guardar()" [disabled]="saving">
+        {{ saving ? 'Guardando...' : 'Guardar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

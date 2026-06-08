@@ -1,0 +1,73 @@
+<div class="page">
+
+  <div class="page-header">
+    <button mat-icon-button (click)="regresar()" matTooltip="Regresar">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    @if(teacher) {
+      <div>
+        <h1>{{ teacher.nombre }}</h1>
+        <p>{{ teacher.materia }} — {{ teacher.turno }}</p>
+      </div>
+    }
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+
+      <p class="hint">
+        Haz click en los horarios en que el maestro
+        <strong>SÍ está disponible</strong>.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="hour-col">Hora</th>
+              @for(day of days; track day) {
+                <th>{{ day }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for(slot of currentSlots; track slot.index) {
+
+              @if(slot.index === currentReceso.afterSlot + 1) {
+                <tr class="break-row">
+                  <td colspan="6">{{ currentReceso.label }}</td>
+                </tr>
+              }
+
+              <tr>
+                <td class="hour-cell">{{ slot.label }}</td>
+                @for(day of days; track day) {
+                  <td
+                    class="avail-cell"
+                    [class.available]="isAvailable(day, slot.index)"
+                    (click)="toggle(day, slot.index)">
+                    @if(isAvailable(day, slot.index)) {
+                      <mat-icon class="check-icon">check</mat-icon>
+                    }
+                  </td>
+                }
+              </tr>
+
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button (click)="regresar()">Cancelar</button>
+      <button mat-raised-button color="primary"
+        (click)="guardar()" [disabled]="saving">
+        {{ saving ? 'Guardando...' : 'Guardar Disponibilidad' }}
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

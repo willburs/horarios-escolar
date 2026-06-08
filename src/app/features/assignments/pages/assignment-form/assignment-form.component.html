@@ -1,0 +1,51 @@
+<div class="page">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nueva Asignación</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Maestro</mat-label>
+          <mat-select formControlName="teacherId">
+            <mat-option value="">Seleccionar</mat-option>
+            @for(teacher of teachers; track teacher.id) {
+              <mat-option [value]="teacher.id">
+                {{ teacher.nombre }} — {{ teacher.materia }} ({{ teacher.turno }})
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Grupo</mat-label>
+          <mat-select formControlName="groupId">
+            <mat-option value="">Seleccionar</mat-option>
+            @for(group of filteredGroups; track group.id) {
+              <mat-option [value]="group.id">
+                {{ group.nombre }} — {{ group.turno }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Horas por semana</mat-label>
+          <input matInput type="number" formControlName="horasSemana">
+          <mat-error>Mínimo 1 hora</mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary"
+        (click)="guardar()" [disabled]="saving">
+        {{ saving ? 'Guardando...' : 'Guardar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

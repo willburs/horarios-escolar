@@ -1,0 +1,52 @@
+<div class="dialog">
+
+  <h3>Asignar Clase</h3>
+
+  <div>
+
+    <label>Maestro</label>
+
+    <select [(ngModel)]="teacher">
+
+      @for(t of teachers; track t){
+
+        <option [value]="t">
+          {{ t }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <div>
+
+    <label>Grupo</label>
+
+    <select [(ngModel)]="group">
+
+      @for(g of groups; track g){
+
+        <option [value]="g">
+          {{ g }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <button
+    (click)="guardar()">
+
+    Guardar
+
+  </button>
+
+</div>

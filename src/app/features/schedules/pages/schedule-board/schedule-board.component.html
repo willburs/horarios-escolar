@@ -1,0 +1,127 @@
+<div class="container">
+
+  <div class="toolbar">
+    <h1>Horario Escolar</h1>
+    <div class="toolbar-right">
+
+      <mat-form-field appearance="outline" class="group-field">
+        <mat-label>Grupo</mat-label>
+        <mat-select [(ngModel)]="selectedGroupId">
+          @for(group of groups; track group.id) {
+            <mat-option [value]="group.id">
+              {{ group.nombre }} — {{ group.turno }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent"
+        (click)="generarHorario()"
+        [disabled]="generating">
+        <mat-icon>bolt</mat-icon>
+        {{ generating ? 'Generando...' : 'Generar Horario' }}
+      </button>
+
+      <button mat-stroked-button color="warn"
+        (click)="limpiarHorario()">
+        <mat-icon>delete_sweep</mat-icon>
+        Limpiar
+      </button>
+
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th class="hour-header">Hora</th>
+          @for(day of days; track day) {
+            <th>{{ day }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for(slot of currentSlots; track slot.index) {
+
+          @if(slot.index === currentReceso.afterSlot + 1) {
+            <tr class="break-row">
+              <td colspan="6">{{ currentReceso.label }}</td>
+            </tr>
+          }
+
+          <tr>
+            <td class="hour-cell">{{ slot.label }}</td>
+            @for(day of days; track day) {
+              <td
+                class="schedule-cell"
+                (click)="openCell(day, slot.index)">
+
+                @if(getEntry(day, slot.index); as entry) {
+                  <div class="card">
+                    <div class="subject">{{ entry.subjectName }}</div>
+                    <div class="teacher">{{ entry.teacherName }}</div>
+                    <div class="group">{{ entry.groupName }}</div>
+                    <button
+                      class="btn-remove"
+                      (click)="$event.stopPropagation(); eliminarEntrada(entry)">
+                      ✕
+                    </button>
+                  </div>
+                } @else {
+                  <div class="empty-cell">+</div>
+                }
+
+              </td>
+            }
+          </tr>
+
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+@if(showDialog) {
+  <div class="overlay">
+    <div class="dialog">
+
+      <h2>Asignar Clase</h2>
+      <p class="dialog-info">
+        {{ selectedDay }} — {{ currentSlots[selectedSlot].label }}
+      </p>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Maestro</mat-label>
+        <mat-select [(ngModel)]="selectedTeacherId">
+          <mat-option value="">Seleccionar</mat-option>
+          @for(teacher of teachersForCurrentGroup; track teacher.id) {
+            <mat-option [value]="teacher.id">
+              {{ teacher.nombre }} — {{ teacher.materia }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Grupo</mat-label>
+        <mat-select [(ngModel)]="selectedGroupDialog">
+          @for(group of groups; track group.id) {
+            <mat-option [value]="group.id">{{ group.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="dialog-actions">
+        <button mat-button (click)="closeDialog()">Cancelar</button>
+        <button mat-raised-button color="primary"
+          (click)="saveEntry()"
+          [disabled]="saving">
+          {{ saving ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

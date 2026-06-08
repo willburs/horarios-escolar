@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+.snack-success {
+  background: #2e7d32 !important;
+  color: white !important;
+}
+
+.snack-error {
+  background: #c62828 !important;
+  color: white !important;
+}
